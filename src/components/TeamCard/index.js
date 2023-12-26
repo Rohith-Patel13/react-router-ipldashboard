@@ -6,7 +6,7 @@ const TeamCard = props => {
   const {eachObject} = props
   const {id, name, teamImageUrl} = eachObject
   return (
-    <Link to={`team-matches/${id}`}>
+    <Link to={`/team-matches/${id}`}>
       <li className="teamCardBg">
         <img src={teamImageUrl} alt={name} className="teamCardBgLogo" />
         <div>

@@ -1,10 +1,13 @@
 // Write your code here
 import {Component} from 'react'
+
+import Loader from 'react-loader-spinner'
+
 import TeamCard from '../TeamCard'
 import './index.css'
 
 class Home extends Component {
-  state = {dataFull: []}
+  state = {dataFull: [], isLoader: true}
 
   componentDidMount() {
     this.getAllTeamsList()
@@ -23,11 +26,11 @@ class Home extends Component {
     }))
     console.log(updatedData)
 
-    this.setState({dataFull: updatedData})
+    this.setState({dataFull: updatedData, isLoader: false})
   }
 
   render() {
-    const {dataFull} = this.state
+    const {dataFull, isLoader} = this.state
 
     return (
       <div className="bgHome">
@@ -39,11 +42,15 @@ class Home extends Component {
           />
           <h1>IPL Dashboard</h1>
         </div>
-        <ul className="bgHomeUl">
-          {dataFull.map(eachObject => (
-            <TeamCard eachObject={eachObject} key={eachObject.id} />
-          ))}
-        </ul>
+        {isLoader ? (
+          <Loader type="Oval" color="#ffffff" height={50} width={50} />
+        ) : (
+          <ul className="bgHomeUl">
+            {dataFull.map(eachObject => (
+              <TeamCard eachObject={eachObject} key={eachObject.id} />
+            ))}
+          </ul>
+        )}
       </div>
     )
   }
